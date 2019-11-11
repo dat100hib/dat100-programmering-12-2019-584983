@@ -2,9 +2,13 @@ package no.hvl.dat100.jplab12.oppgave4;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.File;
+
+import javax.swing.JOptionPane;
 
 import no.hvl.dat100.jplab12.oppgave3.*;
 import no.hvl.dat100.jplab12.common.TODO;
+
 
 public class SkrivBlogg {
 
@@ -12,6 +16,22 @@ public class SkrivBlogg {
 
 	public static boolean skriv(Blogg samling, String filnavn) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		boolean print = true;
+		
+		PrintWriter skriver;
+		
+		
+		try {
+			File file = new File (MAPPE + filnavn);
+			skriver = new PrintWriter(file);
+			skriver.println(samling.toString());
+			skriver.close();
+			
+	}	catch (FileNotFoundException e) {
+		print = false;
+		JOptionPane.showMessageDialog(null, "Filen" + filnavn + "finnes ikke. \n" + e.getMessage());
+		
+		}
+		return print;
 	}
 }

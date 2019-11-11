@@ -5,48 +5,93 @@ import no.hvl.dat100.jplab12.oppgave1.*;
 
 public class Blogg {
 
-	// TODO: objektvariable 
+	private Innlegg[] innleggtabell;
+	private int nesteledige;
 
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		
+		this.innleggtabell = new Innlegg[20];
+		this.nesteledige = 0;
+		
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		
+		this.innleggtabell = new Innlegg[lengde];
+		this.nesteledige = 0;
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		
+		return nesteledige;
 	}
 	
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		
+		return innleggtabell;
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		int p = -1;
+		int i = 0;
+		
+		while (i < nesteledige && p == -1) {
+			if (innleggtabell[i].erLik(innlegg)) {
+				p = i;
+			}
+			i++;
+		}
+		return p;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+		
+		for (Innlegg innleggTab : innleggtabell) {
+			if (innleggTab != null && innleggTab.getId() == innlegg.getId()) {
+				return true;
+			}
+		}
+			return false;
 	}
-
+	
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		
+		boolean lp = false;
+		
+		for (Innlegg i : innleggtabell) {
+			if (i==null) {
+				lp = true;
+				break;
+			}
+		}
+			return lp;
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		if (ledigPlass() == true) {
+			innleggtabell[nesteledige] = innlegg;
+			nesteledige++;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+		
+		String string = getAntall() + "\n";
+		for (Innlegg i : innleggtabell) {
+			if (i != null) {
+				string += i.toString();
+			}
+		}
+		return string;
 	}
-
+	
+	
+	
 	// valgfrie oppgaver nedenfor
 	
 	public void utvid() {
